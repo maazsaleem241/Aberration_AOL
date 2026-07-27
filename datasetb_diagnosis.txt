@@ -1,0 +1,38 @@
+======================================================================
+DATASET OVERVIEW: /home/awais/Desktop/Maaz/Maaz Data/dataset_b/data/reflection_matrix_dataset.h5
+======================================================================
+  O_matrices             shape=(15000, 2, 1600, 1600)  dtype=float32
+  R_matrices             shape=(15000, 2, 1600, 1600)  dtype=float32
+  difficulty_tags        shape=(15000,)  dtype=object
+  intensity_ratios       shape=(15000,)  dtype=float32
+  object_styles          shape=(15000,)  dtype=object
+  phi_i_maps             shape=(15000, 40, 40)  dtype=float32
+  phi_o_maps             shape=(15000, 40, 40)  dtype=float32
+  rms_scaling_factors    shape=(15000,)  dtype=float32
+  split_types            shape=(15000,)  dtype=object
+  target_objects         shape=(15000, 40, 40)  dtype=float32
+
+======================================================================
+NORMALIZATION COMPARISON  (n=200 random samples out of 15000)
+======================================================================
+
+Global min / max across sampled subset: -385.6154 / 424.9834
+Global range: 810.5988
+
+Per-sample RMS magnitude:
+  min=2.7055  max=65.6947  mean=22.5292  std=13.7218
+  ratio (max sample RMS / min sample RMS): 24.28x
+
+If normalized by a SINGLE global min/max, fraction of the global
+range each sample's own peak value would occupy:
+  min=1.2583%  max=52.9665%  median=20.4437%
+
+Interpretation:
+  - If the median occupied fraction is small (e.g. a few percent),
+    most samples would be squeezed into a tiny sliver of the [0,1]
+    range after global min-max, losing most of their contrast --
+    exactly the outlier-sensitivity problem described above.
+  - The 'ratio' line shows how much a sample's own scale varies
+    across the dataset -- a large ratio is exactly why per-sample
+    RMS normalization exists (to remove that nuisance variation),
+    and why re-mixing it back in via a global scheme is risky.
